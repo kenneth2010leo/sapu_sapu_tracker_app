@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
 
-            // tombol next dan mulai
+            //tombol next dan mulai
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
               child: Column(
@@ -74,8 +74,8 @@ class _LoginPageState extends State<LoginPage> {
                     height: 54,
                     child: ElevatedButton(
                       onPressed: () {
-                        if (currentPage == 2) {
-                          print("Login...");
+                        if (currentPage != 2) {
+                          Placeholder();
                         } else {
                           nextPage();
                         }
@@ -317,6 +317,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+
   //untuk pindah bagian
   void nextPage() {
     if (currentPage < maxPage - 1) {
