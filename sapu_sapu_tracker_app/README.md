@@ -1,4 +1,5 @@
-LOGIN PAGE : 
-    - belum connect page lain
-    - beberapa ontap blm ngapa ngapain
-    - beberapa text dan judul belum final
+LOGIN PAGE : - belum connect page lain - beberapa ontap blm ngapa ngapain - beberapa text dan judul belum final
+
+DATABASE :
+nama
+email
