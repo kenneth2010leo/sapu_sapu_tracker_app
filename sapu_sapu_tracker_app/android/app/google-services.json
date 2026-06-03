@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "625334508898",
+    "project_id": "sapu-sapu-tracker",
+    "storage_bucket": "sapu-sapu-tracker.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625334508898:android:7b83bacc6ad40f48fd203b",
+        "android_client_info": {
+          "package_name": "com.example.sapu_sapu_tracker_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaHgbNQa8DwxCUdJ8GuFViZEw4oqCE-xk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
