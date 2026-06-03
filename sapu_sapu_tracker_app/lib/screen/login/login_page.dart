@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sapu_sapu_tracker_app/screen/login/signup_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -119,9 +120,14 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       GestureDetector(
-                        //(masih kosong) -> link daftar akun
-                        onTap: () {},
-                        //textnya
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SignupPage(),
+                            ),
+                          );
+                        },
                         child: const Text(
                           'Daftar',
                           style: TextStyle(
