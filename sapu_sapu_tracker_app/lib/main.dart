@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:sapu_sapu_tracker_app/screen/login_page.dart';
+import 'package:sapu_sapu_tracker_app/screen/login/login_page.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // inisialisasi firebase
+  await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
