@@ -51,13 +51,10 @@ class LoginDummyWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: secondaryColor,
-                borderRadius: BorderRadius.circular(24),
-              ),
-              child: const Icon(Icons.pets, size: 45, color: Colors.white),
+            Image.asset(
+              'assets/logo_aplikasi.png',
+              width: 120,
+              height: 120,
             ),
             const SizedBox(height: 20),
             Text(

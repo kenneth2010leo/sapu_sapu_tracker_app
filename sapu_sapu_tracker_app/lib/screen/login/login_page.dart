@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:sapu_sapu_tracker_app/data/firebase.dart';
-import 'package:sapu_sapu_tracker_app/screen/login/signup_page.dart';
 import 'package:sapu_sapu_tracker_app/widget/login_form.dart';
 import 'package:sapu_sapu_tracker_app/widget/login_widget.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:sapu_sapu_tracker_app/screen/dashboard/dashboard_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sapu_sapu_tracker_app/data/model/user.dart' as model_user;
+import 'package:sapu_sapu_tracker_app/data/service/user_service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -48,9 +51,7 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           PageView(
             controller: pageController,
-            physics: _isFirstTime
-                ? const BouncingScrollPhysics()
-                : const NeverScrollableScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             onPageChanged: (index) {
               setState(() {
                 currentPage = index;
@@ -59,39 +60,74 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               const LoginDummyWidget(
                 title: "Selamat Datang",
-                subtitle: "Aplikasi pelacak kebersihan Sapu-Sapu.",
+                subtitle: "Aplikasi Pelaporan Spesies Ikan Sapu-Sapu.",
               ),
               const LoginDummyWidget(
                 title: "Lacak Lokasi",
-                subtitle: "Pantau area kerja tim Sapu-Sapu secara real-time.",
+                subtitle: "Pantau Persebaran Ikan Sapu-Sapu secara real-time.",
               ),
               // Halaman 2: Cukup panggil LoginFormWidget saja seperti semula
               LoginFormWidget(
-                onLoginPressed: (emailInput, passwordInput) async {
-                  if (emailInput.isEmpty || passwordInput.isEmpty) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(
-                          'Email dan kata sandi tidak boleh kosong!',
-                        ),
-                        backgroundColor: Colors.orange,
-                      ),
-                    );
-                    return;
-                  }
-
+                onGoogleLoginPressed: () async {
                   try {
-                    await FireBase().signInWithEmailAndPassword(
-                      email: emailInput,
-                      password: passwordInput,
+                    final credential = await FireBase().signInWithGoogle();
+
+                    if (credential == null || credential.user == null) {
+                      // User canceled
+                      return;
+                    }
+
+                    if (!context.mounted) return;
+
+                    // Simpan profil user ke Firestore
+                    final firebaseUser = credential.user!;
+                    await UserService().saveUserProfile(
+                      model_user.User(
+                        userId: firebaseUser.uid,
+                        nama: firebaseUser.displayName ?? 'Pengguna Google',
+                        email: firebaseUser.email ?? '',
+                      ),
                     );
 
                     if (!context.mounted) return;
 
+                    // Minta izin lokasi langsung setelah login berhasil
+                    LocationPermission permission =
+                        await Geolocator.checkPermission();
+                    if (permission == LocationPermission.denied) {
+                      await Geolocator.requestPermission();
+                    }
+
+                    if (!context.mounted) return;
+
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Login Berhasil! Selamat datang.'),
-                        backgroundColor: Colors.green,
+                      SnackBar(
+                        content: Row(
+                          children: [
+                            const Icon(Icons.check_circle, color: Colors.white),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Text(
+                                'Selamat datang, ${firebaseUser.displayName ?? "Pengguna"}!',
+                                style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                              ),
+                            ),
+                          ],
+                        ),
+                        backgroundColor: const Color(0xFF338971),
+                        behavior: SnackBarBehavior.floating,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        margin: const EdgeInsets.all(16),
+                        elevation: 6,
+                      ),
+                    );
+
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const DashboardPage(),
                       ),
                     );
                   } catch (e) {
@@ -108,23 +144,22 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ],
           ),
-          // Tampilkan indikator dots HANYA jika aplikasi dibuka pertama kali
-          if (_isFirstTime)
-            Positioned(
-              bottom: 50,
-              left: 0,
-              right: 0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  maxPage,
-                  (index) => LoginIndicatorWidget(
-                    index: index,
-                    currentPage: currentPage,
-                  ),
+          // Tampilkan indikator dots
+          Positioned(
+            bottom: 50,
+            left: 0,
+            right: 0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                maxPage,
+                (index) => LoginIndicatorWidget(
+                  index: index,
+                  currentPage: currentPage,
                 ),
               ),
             ),
+          ),
         ],
       ),
     );

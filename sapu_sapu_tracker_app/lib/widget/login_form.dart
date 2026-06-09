@@ -1,29 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:sapu_sapu_tracker_app/screen/login/signup_page.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginFormWidget extends StatefulWidget {
-  const LoginFormWidget({
-    super.key,
-    required this.onLoginPressed, // Tetap butuh ini untuk mengirim data ke Firebase di halaman utama
-  });
+  const LoginFormWidget({super.key, this.onGoogleLoginPressed});
 
-  // Callback yang melempar string email dan password saat tombol ditekan
-  final Function(String email, String password) onLoginPressed;
+  final VoidCallback? onGoogleLoginPressed;
 
   @override
   State<LoginFormWidget> createState() => _LoginFormWidgetState();
 }
 
 class _LoginFormWidgetState extends State<LoginFormWidget> {
-  // Controller dan State mata password sekarang aman di dalam sini
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  bool _lihatPassword = false;
-
   @override
   void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
     super.dispose();
   }
 
@@ -38,13 +27,10 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Logo & Judul
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: bgIconColor,
-                borderRadius: BorderRadius.circular(24),
-              ),
-              child: const Icon(Icons.pets, size: 45, color: Colors.white),
+            Image.asset(
+              'assets/logo_aplikasi.png',
+              width: 120,
+              height: 120,
             ),
             const SizedBox(height: 20),
             const Text(
@@ -55,103 +41,34 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            const SizedBox(height: 8),
+            Text(
+              'Pantau & laporkan spesies invasif di perairan sekitarmu', // Saya asumsikan teks penuh dari 'Pantau & laporkan sp...'
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: 'Plus Jakarta Sans',
+                fontSize: 14,
+                color: Colors.white.withValues(alpha: 0.65),
+                height: 1.6, // line-height: 160%
+              ),
+            ),
             const SizedBox(height: 32),
 
-            // Input Email
-            TextFormField(
-              controller: _emailController,
-              style: const TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                hintText: 'Email',
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide: BorderSide(color: bgIconColor),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide: const BorderSide(color: Colors.white),
-                ),
+            ElevatedButton.icon(
+              onPressed: widget.onGoogleLoginPressed,
+              icon: SvgPicture.asset(
+                'assets/google.svg',
+                width: 24,
+                height: 24,
               ),
-            ),
-            const SizedBox(height: 16),
-
-            // Input Password
-            TextFormField(
-              controller: _passwordController,
-              obscureText: !_lihatPassword,
-              style: const TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                hintText: 'Kata Sandi',
-                suffixIcon: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      _lihatPassword = !_lihatPassword;
-                    });
-                  },
-                  child: Icon(
-                    _lihatPassword
-                        ? Icons.visibility_outlined
-                        : Icons.visibility_off_outlined,
-                    color: Colors.white.withValues(alpha: 0.6),
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide: BorderSide(color: bgIconColor),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide: const BorderSide(color: Colors.white),
-                ),
+              label: const Text(
+                'Masuk dengan Google',
+                style: TextStyle(color: Colors.white, fontSize: 16),
               ),
-            ),
-            const SizedBox(height: 24),
-
-            // Tombol Login
-            ElevatedButton(
-              onPressed: () {
-                widget.onLoginPressed(
-                  _emailController.text.trim(),
-                  _passwordController.text.trim(),
-                );
-              },
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 50),
                 backgroundColor: bgIconColor,
               ),
-              child: const Text('Masuk', style: TextStyle(color: Colors.white)),
-            ),
-            const SizedBox(
-              height: 24,
-            ), // Beri jarak antara tombol login dan text signup
-            // Bagian Signup (PERBAIKAN SINTAKS DI SINI)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'Belum memiliki akun? ',
-                  style: TextStyle(color: Colors.white70, fontSize: 14),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SignupPage(),
-                      ),
-                    );
-                  },
-                  child: const Text(
-                    'Daftar Sekarang',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                      decoration: TextDecoration.underline,
-                    ),
-                  ),
-                ),
-              ],
             ),
           ],
         ),

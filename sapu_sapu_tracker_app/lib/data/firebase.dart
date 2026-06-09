@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class FireBase {
   // 1. Instance dari FirebaseAuth
@@ -11,45 +12,39 @@ class FireBase {
   // 3. Getter untuk mengambil data user yang sedang login saat ini
   User? get currentUser => _auth.currentUser;
 
-  // 4. Fungsi untuk SIGN UP (Pendaftaran)
-  Future<UserCredential?> signUpWithEmailAndPassword({
-    required String email,
-    required String password,
-  }) async {
-    try {
-      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      return userCredential;
-    } on FirebaseAuthException catch (e) {
-      // Melempar kembali error spesifik Firebase agar bisa ditangkap di UI
-      throw _handleAuthException(e);
-    } catch (e) {
-      throw 'Terjadi kesalahan yang tidak diketahui.';
-    }
-  }
 
-  // 5. Fungsi untuk SIGN IN (Login)
-  Future<UserCredential?> signInWithEmailAndPassword({
-    required String email,
-    required String password,
-  }) async {
+  // 6. Fungsi untuk SIGN IN dengan Google
+  Future<UserCredential?> signInWithGoogle() async {
     try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
+      // Trigger the authentication flow
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      if (googleUser == null) {
+        // User canceled the sign-in
+        return null;
+      }
+
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+      // Create a new credential
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
       );
-      return userCredential;
+
+      // Once signed in, return the UserCredential
+      return await _auth.signInWithCredential(credential);
     } on FirebaseAuthException catch (e) {
       throw _handleAuthException(e);
     } catch (e) {
-      throw 'Terjadi kesalahan yang tidak diketahui.';
+      throw 'Terjadi kesalahan saat login dengan Google: $e';
     }
   }
 
-  // 6. Fungsi untuk SIGN OUT (Logout)
+  // 7. Fungsi untuk SIGN OUT (Logout)
   Future<void> signOut() async {
+    await GoogleSignIn().signOut();
     await _auth.signOut();
   }
 

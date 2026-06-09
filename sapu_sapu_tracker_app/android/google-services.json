@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "625334508898",
+    "project_id": "sapu-sapu-tracker",
+    "storage_bucket": "sapu-sapu-tracker.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625334508898:android:7b83bacc6ad40f48fd203b",
+        "android_client_info": {
+          "package_name": "com.example.sapu_sapu_tracker_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "625334508898-ao3ssnbcgfnfe7gpqp0sdd25svpg5dt7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sapu_sapu_tracker_app",
+            "certificate_hash": "6a7cf806b56005b41943362b7d7672e1fc7468e6"
+          }
+        },
+        {
+          "client_id": "625334508898-6p9g2e44od6rboj7r3kvlrorhao5kik5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaHgbNQa8DwxCUdJ8GuFViZEw4oqCE-xk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "625334508898-6p9g2e44od6rboj7r3kvlrorhao5kik5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
