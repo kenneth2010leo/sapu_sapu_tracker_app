@@ -86,18 +86,5 @@ Jika Anda ingin membagikan aplikasi ini kepada teman atau dosen agar bisa langsu
    `build/app/outputs/flutter-apk/app-release.apk`
 5. Kirim file `app-release.apk` tersebut via WhatsApp/Google Drive ke HP Android untuk di-install.
 
-## 🍎 Cara Membangun (Build) untuk iOS
-> **Catatan Penting**: Anda **wajib** menggunakan komputer Mac (MacBook/iMac) yang telah terinstal **Xcode** untuk membangun aplikasi iOS. Proses ini tidak bisa dilakukan di laptop Windows.
-
-1. Buka terminal di Mac Anda (pastikan Anda berada di direktori `sapu_sapu_tracker_app`).
-2. Jalankan perintah build iOS:
-   ```bash
-   flutter build ipa --release
-   ```
-3. Tunggu proses *compiling* selesai.
-4. Jika berhasil, file `.ipa` akan dihasilkan di dalam folder:
-   `build/ios/ipa/`
-5. Untuk meng-install aplikasi ini ke perangkat fisik iPhone teman Anda, Anda memerlukan akun **Apple Developer** dan mendistribusikannya melalui **TestFlight** atau injeksi lokal melalui Xcode.
-
 ---
 *Aplikasi ini dikembangkan untuk mendukung upaya monitoring ekosistem perairan dari spesies invasif.*
