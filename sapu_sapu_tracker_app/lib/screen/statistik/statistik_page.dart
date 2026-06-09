@@ -87,7 +87,7 @@ class StatistikPage extends StatelessWidget {
             ),
             padding: const EdgeInsets.all(8),
             child: SvgPicture.asset(
-              'assets/statistik.svg',
+              'assets/for_app/statistik.svg',
               colorFilter: const ColorFilter.mode(
                 Colors.white,
                 BlendMode.srcIn,

@@ -62,16 +62,16 @@ class _DashboardPageState extends State<DashboardPage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _buildNavItem(iconPath: 'assets/home.svg', label: 'Home', index: 0),
-            _buildNavItem(iconPath: 'assets/peta.svg', label: 'Peta', index: 1),
+            _buildNavItem(iconPath: 'assets/for_app/home.svg', label: 'Home', index: 0),
+            _buildNavItem(iconPath: 'assets/for_app/peta.svg', label: 'Peta', index: 1),
             const SizedBox(width: 48), // Space for FAB
             _buildNavItem(
-              iconPath: 'assets/statistik.svg',
+              iconPath: 'assets/for_app/statistik.svg',
               label: 'Statistik',
               index: 2,
             ),
             _buildNavItem(
-              iconPath: 'assets/profile.svg',
+              iconPath: 'assets/for_app/profile.svg',
               label: 'Profil',
               index: 3,
             ),

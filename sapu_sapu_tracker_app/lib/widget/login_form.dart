@@ -28,7 +28,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
           children: [
             // Logo & Judul
             Image.asset(
-              'assets/logo_aplikasi.png',
+              'assets/for_app/logo_aplikasi.png',
               width: 120,
               height: 120,
             ),
@@ -57,7 +57,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
             ElevatedButton.icon(
               onPressed: widget.onGoogleLoginPressed,
               icon: SvgPicture.asset(
-                'assets/google.svg',
+                'assets/for_app/google.svg',
                 width: 24,
                 height: 24,
               ),

@@ -122,7 +122,7 @@ class HomePage extends StatelessWidget {
             children: [
               _buildStatCard(
                 context: context,
-                iconPath: 'assets/total_laporan.svg',
+                iconPath: 'assets/for_app/total_laporan.svg',
                 iconBgColor: const Color(0xFFE1F5EE),
                 value: totalLaporan,
                 valueColor: const Color(0xFF0F6E56),
@@ -131,7 +131,7 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 10),
               _buildStatCard(
                 context: context,
-                iconPath: 'assets/kontributor.svg',
+                iconPath: 'assets/for_app/kontributor.svg',
                 iconBgColor: const Color(0xFFE6F1FB),
                 value: kontributor,
                 valueColor: const Color(0xFF185FA5),
@@ -143,7 +143,7 @@ class HomePage extends StatelessWidget {
             children: [
               _buildStatCard(
                 context: context,
-                iconPath: 'assets/lokasi_terpantau.svg',
+                iconPath: 'assets/for_app/lokasi_terpantau.svg',
                 iconBgColor: const Color(0xFFFAEEDA),
                 value: lokasiTerpantau,
                 valueColor: const Color(0xFFEF9F27),
@@ -152,7 +152,7 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 10),
               _buildStatCard(
                 context: context,
-                iconPath: 'assets/minggu_ini.svg',
+                iconPath: 'assets/for_app/minggu_ini.svg',
                 iconBgColor: const Color(0xFFFCEBEB),
                 value: mingguIni,
                 valueColor: const Color(0xFFE24B4A),

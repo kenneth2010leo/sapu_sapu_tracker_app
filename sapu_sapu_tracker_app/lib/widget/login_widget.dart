@@ -52,7 +52,7 @@ class LoginDummyWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/logo_aplikasi.png',
+              'assets/for_app/logo_aplikasi.png',
               width: 120,
               height: 120,
             ),

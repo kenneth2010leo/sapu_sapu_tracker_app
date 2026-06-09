@@ -132,7 +132,7 @@ class PhotoUploadWidget extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                     padding: const EdgeInsets.all(12),
-                    child: SvgPicture.asset('assets/tambah_foto_ikan.svg'),
+                    child: SvgPicture.asset('assets/for_app/tambah_foto_ikan.svg'),
                   ),
                   const SizedBox(height: 8),
                   const Text(

@@ -470,7 +470,7 @@ class _CreateReportPageState extends State<CreateReportPage> {
               ),
               padding: const EdgeInsets.all(8),
               child: SvgPicture.asset(
-                'assets/back.svg',
+                'assets/for_app/back.svg',
                 colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
               ),
             ),
@@ -559,7 +559,7 @@ class _CreateReportPageState extends State<CreateReportPage> {
                 ),
               )
             else
-              SvgPicture.asset('assets/kirim_lokasi.svg', width: 18, height: 18),
+              SvgPicture.asset('assets/for_app/kirim_lokasi.svg', width: 18, height: 18),
             const SizedBox(width: 8),
             Text(
               _isSubmitting ? 'Mengirim...' : 'Kirim Laporan',

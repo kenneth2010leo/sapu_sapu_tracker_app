@@ -116,7 +116,7 @@ class LocationInfoWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildReadOnlyInput(
-          iconPath: 'assets/lokasi_gps.svg',
+          iconPath: 'assets/for_app/lokasi_gps.svg',
           text: '${currentLocation.latitude.toStringAsFixed(4)}, ${currentLocation.longitude.toStringAsFixed(4)}',
           textColor: const Color(0xFF1D9E75),
           onTap: onCoordinateTap,
