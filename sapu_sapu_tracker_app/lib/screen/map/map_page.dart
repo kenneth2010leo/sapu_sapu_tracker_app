@@ -21,7 +21,8 @@ class _MapPageState extends State<MapPage> {
       options: const MapOptions(
         initialCenter: LatLng(-7.5000, 110.0000), // Tengah Pulau Jawa
         initialZoom: 6.5,
-        minZoom: 5.0, // Membatasi agar tidak bisa zoom out sampai ke seluruh dunia
+        minZoom:
+            5.0, // Membatasi agar tidak bisa zoom out sampai ke seluruh dunia
         maxZoom: 18.0,
         // Mematikan rotasi (putaran) agar peta tidak miring/bergeser saat di-zoom
         interactionOptions: InteractionOptions(
@@ -31,9 +32,11 @@ class _MapPageState extends State<MapPage> {
       children: [
         TileLayer(
           // --- MAPTILER TILE URL ---
-          urlTemplate: 'https://api.maptiler.com/maps/streets-v2/256/{z}/{x}/{y}.png?key=${dotenv.env['MAPTILER_API_KEY']}',
+          urlTemplate:
+              'https://api.maptiler.com/maps/streets-v2/256/{z}/{x}/{y}.png?key=${dotenv.env['MAPTILER_API_KEY']}',
           userAgentPackageName: 'com.example.sapu_sapu_tracker_app',
-          keepBuffer: 10, // Menjaga tile di memori agar tidak selalu loading saat geser peta
+          keepBuffer:
+              10, // Menjaga tile di memori agar tidak selalu loading saat geser peta
         ),
         StreamBuilder<QuerySnapshot>(
           stream: _firestoreService.getApprovedReportsStream(),
@@ -42,7 +45,7 @@ class _MapPageState extends State<MapPage> {
               return const Center(child: Text('Gagal memuat data'));
             }
 
-            // Dihapus pengecekan ConnectionState.waiting agar MarkerLayer tidak terganti 
+            // Dihapus pengecekan ConnectionState.waiting agar MarkerLayer tidak terganti
             // oleh CircularProgressIndicator yang membuat layar peta berkedip putih/loading.
 
             final docs = snapshot.data?.docs ?? [];
@@ -51,7 +54,7 @@ class _MapPageState extends State<MapPage> {
               final data = doc.data() as Map<String, dynamic>;
               final lat = data['lat'] ?? 0.0;
               final lng = data['lng'] ?? 0.0;
-              
+
               return Marker(
                 point: LatLng(lat, lng),
                 width: 40,
@@ -64,11 +67,16 @@ class _MapPageState extends State<MapPage> {
                       shape: BoxShape.circle,
                       border: Border.all(color: Colors.white, width: 2),
                       boxShadow: const [
-                        BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(0, 2)),
+                        BoxShadow(
+                          color: Colors.black26,
+                          blurRadius: 4,
+                          offset: Offset(0, 2),
+                        ),
                       ],
                     ),
                     child: const Icon(
-                      Icons.set_meal, // Ikon ikan bawaan Flutter sebagai pengganti SVG
+                      Icons
+                          .set_meal, // Ikon ikan bawaan Flutter sebagai pengganti SVG
                       color: Colors.white,
                       size: 20,
                     ),
@@ -84,11 +92,17 @@ class _MapPageState extends State<MapPage> {
     );
   }
 
-  void _showReportDetails(BuildContext context, Map<String, dynamic> reportData) {
+  void _showReportDetails(
+    BuildContext context,
+    Map<String, dynamic> reportData,
+  ) {
     final String fullAddress = reportData['fullAddress']?.toString() ?? '';
-    final String fallbackAddress = '${reportData['district']}, ${reportData['city']}, ${reportData['province']}';
-    final String address = fullAddress.isNotEmpty ? fullAddress : fallbackAddress;
-    
+    final String fallbackAddress =
+        '${reportData['district']}, ${reportData['city']}, ${reportData['province']}';
+    final String address = fullAddress.isNotEmpty
+        ? fullAddress
+        : fallbackAddress;
+
     final String rawDesc = reportData['description'] ?? 'Tidak ada catatan';
     String desc = rawDesc;
     // Ekstrak angka pertama dari deskripsi e.g. "12 ekor ikan..."
@@ -173,18 +187,32 @@ class _MapPageState extends State<MapPage> {
                         const SizedBox(height: 4),
                         Row(
                           children: [
-                            const Icon(Icons.location_on, size: 12, color: Color(0xFF888888)),
+                            const Icon(
+                              Icons.location_on,
+                              size: 12,
+                              color: Color(0xFF888888),
+                            ),
                             const SizedBox(width: 4),
                             Text(
                               '${lat.toStringAsFixed(4)}, ${lng.toStringAsFixed(4)}',
-                              style: const TextStyle(fontSize: 12, color: Color(0xFF888888)),
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: Color(0xFF888888),
+                              ),
                             ),
                             const SizedBox(width: 8),
-                            const Icon(Icons.access_time, size: 12, color: Color(0xFF888888)),
+                            const Icon(
+                              Icons.access_time,
+                              size: 12,
+                              color: Color(0xFF888888),
+                            ),
                             const SizedBox(width: 4),
                             Text(
                               timeStr,
-                              style: const TextStyle(fontSize: 12, color: Color(0xFF888888)),
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: Color(0xFF888888),
+                              ),
                             ),
                           ],
                         ),
@@ -209,7 +237,10 @@ class _MapPageState extends State<MapPage> {
                 decoration: BoxDecoration(
                   color: const Color(0xFFF7FAF8),
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: const Color(0xFFE0EDE7), width: 0.74),
+                  border: Border.all(
+                    color: const Color(0xFFE0EDE7),
+                    width: 0.74,
+                  ),
                 ),
                 child: Text(
                   desc,
